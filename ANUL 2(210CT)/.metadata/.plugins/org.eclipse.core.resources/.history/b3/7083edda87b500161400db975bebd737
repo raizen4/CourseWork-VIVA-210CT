@@ -1,0 +1,46 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.file.attribute.AclEntry.Builder;
+import java.util.ArrayList;
+
+public class Problem1 {
+	static String reversedSentence="";
+ public static void main(String...args) throws Exception{
+	 String sentenceEntered="";
+	 BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+	 System.out.println("Please enter the sentence which you want to reverse");
+	 sentenceEntered=reader.readLine();
+	 System.out.println(inverseSentence(sentenceEntered));
+	 
+	 
+ }
+
+ public static String inverseSentence(String sentenceToInverse){
+	 char[] letters=sentenceToInverse.toCharArray();
+	 ArrayList<String> invertedArray=new ArrayList<>();
+	 StringBuilder builder=new StringBuilder();
+	 for(int i=0;i<letters.length;++i){
+		 if(letters[i]!=' ' && i!=letters.length-1){
+			 builder.append(letters[i]);
+			 
+		 }
+		 else if(i==letters.length-1){
+			     builder.append(letters[i]);
+			     builder.append(" ");
+				 invertedArray.add(builder.toString());
+			 }
+		 else{
+			 if(i<=letters.length-1){
+				 builder.append(" ");
+			 }
+			 invertedArray.add(builder.toString());
+			 builder=new StringBuilder();
+		 }
+	 }
+	 builder=new StringBuilder();
+	for(int i=invertedArray.size()-1;i>=0;--i){
+		builder.append(invertedArray.get(i));
+	}
+	return reversedSentence=builder.toString();
+}
+}

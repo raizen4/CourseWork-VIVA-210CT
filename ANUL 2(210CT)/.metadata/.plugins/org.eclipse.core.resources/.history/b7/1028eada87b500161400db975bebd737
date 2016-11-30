@@ -1,0 +1,30 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Problem2 {
+
+	
+	public static void main(String...args) throws IOException{
+		int numberToCheck=0;
+		BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("enter the number to check if it is prime");
+		numberToCheck=Integer.parseInt(reader.readLine());
+		System.out.println(isPrime(numberToCheck,2,numberToCheck/2));
+		
+	}
+	
+	public static String isPrime(int numberToCheck,int begin,int end){
+		if(begin==end){
+			return "Is Prime";
+		}
+		else if(numberToCheck%begin==0){
+			return "Is not prime";
+		}
+		else{
+			
+			return isPrime(numberToCheck,begin+1,end);
+		}
+		
+	}
+}

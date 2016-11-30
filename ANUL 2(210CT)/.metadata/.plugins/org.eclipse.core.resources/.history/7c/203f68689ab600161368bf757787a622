@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+
+public class WeightedGraph {
+
+	ArrayList<Node> listOfNodes;
+	
+	private class Node{
+		int data;
+		HashMap<Node,Integer> relatedNodesAndWeights;
+		
+		public Node(int data){
+			this.data=data;
+			relatedNodesAndWeights=new HashMap<>();
+		}
+	}
+	public WeightedGraph(){
+		listOfNodes=new ArrayList<>();
+	}
+	
+	public void addEdge(int from_vertex,int to_vertex,int weight){
+		Node nodeFromVertex=listOfNodes.get(from_vertex);
+		Node nodeToVertex=listOfNodes.get(to_vertex);
+		nodeFromVertex.relatedNodesAndWeights.put(nodeToVertex, weight);
+		
+		
+	}
+	public void addNode(int data){
+		Node newNode=new Node(data);
+		listOfNodes.add(newNode);
+	}
+	public void getRelatedNodes(int vertex){
+		Node node=listOfNodes.get(vertex);
+		for(Node relatedNode: node.relatedNodesAndWeights.keySet()){
+			System.out.print(relatedNode.data+" ");
+		}
+	}
+	
+	public ArrayList<Node>getNeighbourForThisNode(Node nodeToRetrieveNeighboursFor){
+		ArrayList<Node> neighbours=new ArrayList<>();
+		for(Node neighbour:nodeToRetrieveNeighboursFor.relatedNodesAndWeights.keySet()){
+			neighbours.add(neighbour);
+		}
+		return neighbours;
+	}
+	
+	public void printPath(HashMap<Node,Node>pathTraversed,Node startNode,Node endNode){
+		ArrayList<Node> path=new ArrayList<>();
+		Node current=endNode;
+		path.add(current);
+		while(current!=startNode){
+			current=pathTraversed.get(current);
+		}
+		for(int i=path.size()-1;i>=0;--i){
+			System.out.println(path.get(i).data);
+		}
+		
+	}
+	
+	public void DijkstraSearch(int vertexToBegin,int vertexToEnd){
+		HashMap<Node,Node> cameFrom=new HashMap<>();
+		HashMap<Node,Integer> costSoFar=new HashMap<>();
+		PriorityQueue<Node> frontier=new PriorityQueue<>();
+		Node nodeToBegin=listOfNodes.get(vertexToBegin);
+		Node nodeToEnd=listOfNodes.get(vertexToBegin);
+		costSoFar.put(nodeToBegin, 0);
+		cameFrom.put(nodeToBegin, null);
+		frontier.add(nodeToBegin);
+		while (!frontier.isEmpty()){
+			Node current=frontier.poll();
+			System.out.println(current.data);
+			if (current==nodeToEnd)
+					break;
+			for (Node nextNeighbour: getNeighbourForThisNode(current)){
+				System.out.println(costSoFar);
+				int new_cost=costSoFar.get(current)+current.relatedNodesAndWeights.get(nextNeighbour);
+				System.out.println(new_cost);
+				if(!cameFrom.containsKey(nextNeighbour) || new_cost<costSoFar.get(nextNeighbour)){
+					costSoFar.put(nextNeighbour, new_cost);
+			
+					frontier.add(nextNeighbour);
+					cameFrom.put(nextNeighbour, current);
+				}
+			}
+		}
+		printPath(cameFrom,nodeToBegin,nodeToEnd);
+		
+	}
+	
+	public void showGraph(){
+		for(Node node:listOfNodes){
+			System.out.print(node.data+": ");
+			for(Node relatedNode:node.relatedNodesAndWeights.keySet()){
+				System.out.print(relatedNode.data+"("+node.relatedNodesAndWeights.get(relatedNode)+")"+" ");
+				
+			}
+			System.out.println();
+		}
+	}
+}

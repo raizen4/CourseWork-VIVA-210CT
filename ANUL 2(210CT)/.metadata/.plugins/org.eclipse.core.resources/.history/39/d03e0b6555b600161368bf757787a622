@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class WeightedGraph {
+
+	ArrayList<Node> listOfNodes;
+	
+	private class Node{
+		int data;
+		HashMap<Node,Integer> relatedNodesAndWeights;
+		
+		public Node(int data){
+			this.data=data;
+			relatedNodesAndWeights=new HashMap<>();
+		}
+	}
+	public WeightedGraph(){
+		listOfNodes=new ArrayList<>();
+	}
+	
+	public void addEdge(int from_vertex,int to_vertex,int weight){
+		Node nodeFromVertex=listOfNodes.get(from_vertex);
+		Node nodeToVertex=listOfNodes.get(to_vertex);
+		nodeFromVertex.relatedNodesAndWeights.put(nodeToVertex, weight);
+		
+		
+	}
+	public void addNode(int data){
+		Node newNode=new Node(data);
+		listOfNodes.add(newNode);
+	}
+	public void getRelatedNodes(int vertex){
+		Node node=listOfNodes.get(vertex);
+		for(Node relatedNode: node.relatedNodesAndWeights.keySet()){
+			System.out.print(relatedNode.data+" ");
+		}
+	}
+	
+	public void showGraph(){
+		for(Node node:listOfNodes){
+			System.out.print(node.data+": ");
+			for(Node relatedNode:node.relatedNodesAndWeights.keySet()){
+				System.out.print(relatedNode.data+"("+node.relatedNodesAndWeights.get(relatedNode)+")"+" ");
+				
+			}
+			System.out.println();
+		}
+	}
+}
