@@ -1,17 +1,53 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
-
+/*class UnWeightedGraph
+	listOfNodes;
+	Constructor UnWeightedGraph()
+		listOfNodes<- Initialize the arrayList which is of type Node
+	
+	Function addEdge(from_vertex,to_vertex)
+		nodeFromVertex<-get the node with the index "from_vertex" from the listOfNodes
+		nodeToVertex<-get the node with the index "to_vertex" from the listOfNodes
+		add the nodeToVertex to the list of nodeFromVertex
+		add the nodeFromVertex to the list of nodeToVertex
+		
+		
+	Function addNode(data)
+		newNode<-create a new node;
+		add the newNode to the listOfNodes of the graph 
+		
+		
+	Function getRelatedNodes(index)
+			node<-get the node whose index you want to get the relatedNodes of
+			for each relatedNode in the  node.relatedNodes
+				print the value of that node
+				
+ 	Funtion showGraph()
+		for each node in listOfNodes
+			print node.data
+			for each relatedNode in the node.relatedNodes
+				print relatedNode.data
+			}
+			print empty lane
+		}
+	}
+*/
+/*class Node
+	relatedNodes
+	data
+	Constructor Node(value)
+		data<-value
+		relatedNodes<- create a new arrayList of the type Node
+*/
 public class UnWeightedGraph {
 	ArrayList<Node> listOfNodes;
 	public class Node{
 		ArrayList<Node> relatedNodes;
 		int data;
-		boolean isVisited;
 		public Node(int value){
 			data=value;
 			relatedNodes=new ArrayList<>();
-			isVisited=false;
 		}
 	}
 	
@@ -30,8 +66,8 @@ public class UnWeightedGraph {
 		Node newNode=new Node(data);
 		listOfNodes.add(newNode);
 	}
-	public void getRelatedNodes(int vertex){
-		Node node=listOfNodes.get(vertex);
+	public void getRelatedNodes(int index){
+		Node node=listOfNodes.get(index);
 		for(Node relatedNode: node.relatedNodes){
 			System.out.print(relatedNode.data+" ");
 		}
