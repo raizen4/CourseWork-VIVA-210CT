@@ -138,9 +138,9 @@ public class UnWeightedGraph {
 		if(found==true){
 		try{
     			PrintWriter writer = new PrintWriter("path.txt", "UTF-8");
-   			writer.println(path.toString);
+   			writer.println(path);
     			writer.close();
-			} catch (IOException e) {}
+			} catch (Exception e) {}
 		return path;
 		
 		}
