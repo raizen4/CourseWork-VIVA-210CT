@@ -1,5 +1,5 @@
 import org.eclipse.jdt.annotation.Nullable;
-
+//The overall runtime of this algorithm is O(n^3) because the most demanding one is the multiply of the matrices which takes 3 for's in order to be done, the other 2 operations take only O(n^2)
 public class Problem3MatrixOperationClass {
 
 	public Problem3MatrixOperationClass(){
