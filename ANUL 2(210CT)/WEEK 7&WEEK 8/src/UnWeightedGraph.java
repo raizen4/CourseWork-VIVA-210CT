@@ -136,7 +136,13 @@ public class UnWeightedGraph {
 			
 		}
 		if(found==true){
+		try{
+    			PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+   			writer.println(path.toString);
+    			writer.close();
+			} catch (IOException e) {}
 		return path;
+		
 		}
 		else{
 			System.out.println("There is no path between these vertices");
